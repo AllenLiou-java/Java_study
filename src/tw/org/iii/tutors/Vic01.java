@@ -15,6 +15,10 @@ public class Vic01 {
 		
 		byte var2 = 123;
 		System.out.println(var2);
+		
+		//	指數值後面加上一個大寫L，否則會報錯
+		long num=32967359818L;
+		System.out.println("num="+num);
 
 	}
 

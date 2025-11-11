@@ -1,0 +1,22 @@
+package tw.org.iii.tutors;
+
+public class Vic11 {
+
+	public static void main(String[] args) {
+
+		int i=0;
+		for(init(); i<10; drawLine()) {
+			System.out.println(i++);
+		}
+		
+	}
+	
+	static void init() {
+		System.out.println("Vic");
+	}
+	
+	static void drawLine() {
+		System.out.println("------------");
+	}
+
+}
