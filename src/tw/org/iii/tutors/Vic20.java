@@ -65,8 +65,10 @@ public class Vic20 {
 		System.out.println(id3.getId());
 		System.out.println(id4.getId());
 		
+		
 		TWId id = TWId.createTWId("X111934909");
 		System.out.println(id.getId());
+		System.out.println(TWId.isRightId("X111934909"));
 
 	}
 

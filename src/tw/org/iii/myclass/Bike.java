@@ -1,12 +1,14 @@
 package tw.org.iii.myclass;
 
+// JAVA所有類別都是繼承Object
 public class Bike {
 	// 擁有 屬性、方法
-	private double speed;
+	// 為了讓子類別能夠存取，故使用protected存取修飾字
+	protected double speed;
 	private String color;
 
 	//	建構式名稱與 class名稱相同
-	//	建構式主要負責物件的初始化，在執行之前物件已產生
+	//	建構式主要負責物件屬性的初始化，在執行之前物件已產生
 	public Bike() {
 		color = "yellow";
 	}

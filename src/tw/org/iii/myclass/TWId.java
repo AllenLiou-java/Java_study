@@ -32,6 +32,7 @@ public class TWId {
 		 * StringBuffer
 		 */
 
+		// super()
 		StringBuffer sb = new StringBuffer(letters.substring(area, area + 1));
 		sb.append(isMale ? "1" : "2");
 
