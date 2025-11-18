@@ -64,7 +64,7 @@ public class TWId {
 		}
 		return temp;
 	}
-	
+
 	public String getId() {
 		return id;
 	}
@@ -97,6 +97,17 @@ public class TWId {
 			return n % 10 == 0;
 		}
 		return ret;
+	}
+
+	@Override
+	public String toString() {
+
+		return id;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return this.getId().equals(((TWId) obj).getId());
 	}
 
 }
