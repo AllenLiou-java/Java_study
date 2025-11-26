@@ -6,13 +6,15 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 import javax.swing.JPanel;
 
 public class SignView extends JPanel {
 //	private LinkedList<Point> line;	// 儲存單一線條的資料
-	private LinkedList<LinkedList<Point>> lines; // 儲存多線條的資料
+//	private LinkedList<LinkedList<Point>> lines; // 儲存多線條的資料
+	private LinkedList<LinkedList<HashMap<String, Integer>>> lines, recycler;
 
 	public SignView() {
 		setBackground(Color.YELLOW);
@@ -24,6 +26,7 @@ public class SignView extends JPanel {
 
 //		line = new LinkedList<>();
 		lines = new LinkedList<>();
+		recycler = new LinkedList<>(); // 宣告recycler後記得建構式初始化時new 物件實體
 	}
 
 	// paintComponent 是由內部自動被呼叫，不需要主動去呼叫
@@ -52,12 +55,20 @@ public class SignView extends JPanel {
 //			g.drawLine(p0.x, p0.y, p1.x, p1.y);
 //		}
 
-		// 繪圖 - 更新存下來的線條(多線條)
-		for (LinkedList<Point> line : lines) {
+//		// 繪圖 - 更新存下來的線條(多線條)
+//		for (LinkedList<Point> line : lines) {
+//			for (int i = 1; i < line.size(); i++) {
+//				Point p0 = line.get(i - 1);
+//				Point p1 = line.get(i);
+//				g.drawLine(p0.x, p0.y, p1.x, p1.y);
+//			}
+//		}
+
+		for (LinkedList<HashMap<String, Integer>> line : lines) {
 			for (int i = 1; i < line.size(); i++) {
-				Point p0 = line.get(i - 1);
-				Point p1 = line.get(i);
-				g.drawLine(p0.x, p0.y, p1.x, p1.y);
+				HashMap<String, Integer> p0 = line.get(i - 1);
+				HashMap<String, Integer> p1 = line.get(i);
+				g.drawLine(p0.get("x"), p0.get("y"), p1.get("x"), p1.get("y"));
 			}
 		}
 
@@ -83,31 +94,71 @@ public class SignView extends JPanel {
 		public void mousePressed(MouseEvent e) {
 			super.mousePressed(e);
 			// 當Pressed觸發後，產生新的線
-			LinkedList<Point> line = new LinkedList<>();
+//			LinkedList<Point> line = new LinkedList<>();
+//
+//			// 當Pressed觸發後，產生新的點
+//			Point point = new Point();
+//			point.x = e.getX();
+//			point.y = e.getY();
+//			line.add(point);
+//
+//			lines.add(line);
+
+			// 當Pressed觸發後，產生新的線
+			LinkedList<HashMap<String, Integer>> line = new LinkedList<>();
 
 			// 當Pressed觸發後，產生新的點
-			Point point = new Point();
-			point.x = e.getX();
-			point.y = e.getY();
+			HashMap<String, Integer> point = new HashMap<>();
+			point.put("x", e.getX());
+			point.put("y", e.getY());
 			line.add(point);
-
 			lines.add(line);
+			recycler.clear();
+
 		}
 
 		@Override
 		public void mouseDragged(MouseEvent e) {
 			super.mouseDragged(e);
 
-			Point point = new Point();
-			point.x = e.getX();
-			point.y = e.getY();
+//			Point point = new Point();
+//			point.x = e.getX();
+//			point.y = e.getY();
+//			lines.getLast().add(point);
 
+			HashMap<String, Integer> point = new HashMap<>();
+			point.put("x", e.getX());
+			point.put("y", e.getY());
 			lines.getLast().add(point);
+
 			repaint();
 		}
 	}
 
-	private class Point {
-		int x, y;
+//	private class Point {
+//		int x, y;
+//	}
+
+	public void clear() {
+		lines.clear();
+		repaint();
+	}
+
+	public void undo() {
+		if (lines.size() > 0) {
+			recycler.add(lines.removeLast());
+			repaint();
+		}
+
+	}
+
+	public void redo() {
+		if (recycler.size() > 0) {
+			lines.add(recycler.removeLast());
+			repaint();
+		}
 	}
 }
+
+// 只有在Interface Collection下的才能用forEach尋訪
+// 用HashMap來取代Point類別

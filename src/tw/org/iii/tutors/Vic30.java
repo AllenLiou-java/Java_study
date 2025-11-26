@@ -39,7 +39,7 @@ public class Vic30 {
 		}
 		System.out.println(lotto1); // 此時會產生 不重複的號碼，但「不具順序性」- [48, 21, 45, 30, 14, 31]
 
-		// ===== 使用 TreeSett =====
+		// ===== 使用 TreeSet =====
 		TreeSet<Integer> lotto2 = new TreeSet<>();
 		while (lotto2.size() < 6) {
 			lotto2.add((int) (Math.random() * 49 + 1));
@@ -59,8 +59,3 @@ public class Vic30 {
 	}
 
 }
-
-//簽名功能
-//1. 要有簽名板 => component 繼承觀念
-//2. 抓取在簽名板上的 drag 位置資訊 (x, y)
-//3. 儲存點位置的資料結構

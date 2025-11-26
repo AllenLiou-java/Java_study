@@ -6,6 +6,7 @@ public class TWId {
 	// 為了讓建構式 與 isRightId同時都能使用letters，故將此提取出來
 	// 因letters存在於{...}的作用域中，且不允許被變更，故設定private
 	// 為了能讓 isRightId 內部使用letters，須加上static
+	// static 修飾字：static 方法不需要先建立該物件即可呼叫使用
 	private static String letters = "ABCDEFGHJKLMNPQRSTUVXYWZIO";
 
 	// 建立多個建構式(overloading )，此方式便於維護
@@ -57,6 +58,7 @@ public class TWId {
 		this.id = id;
 	}
 
+	// 因為建構式 TWID(String id) 與 id 存取設定private，只能透過自己來建立id
 	public static TWId createTWId(String id) {
 		TWId temp = null;
 		if (isRightId(id)) {

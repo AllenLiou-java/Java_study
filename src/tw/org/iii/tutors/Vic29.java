@@ -72,6 +72,7 @@ public class Vic29 extends JFrame {
 		// 因為 MouseListener、MouseMotionListener 都是介面，若要使用這些介面，則必須實作該介面下的所有方法(共7個方法)
 		// 此時 可以透過抽象類別 - MouseAdapter 來實作此兩介面的部分方法
 		// 抽象類別皆有實作指定的介面，但實作的方法的內容都是空的，此時開發者可以透過子類別繼承並override指定的方法
+		// 抽象類別意義在於創造多型，此抽象類別無法做出物件實體，其主要目的是讓開發者能透過子類別實作物件多型化
 		MyMouseListener listener = new MyMouseListener();
 		textArea.addMouseListener(listener);
 		textArea.addMouseMotionListener(listener);
